@@ -7,14 +7,7 @@ import { reduxFirestore, firestoreReducer } from "redux-firestore";
 
 // Reducers
 
-const firebaseConfig = {
-  apiKey: "AIzaSyACBuxFkW8mCe3AAqKb6A3vz6Wk-eTKtI4",
-  authDomain: "reactclientpanel-840bb.firebaseapp.com",
-  databaseURL: "https://reactclientpanel-840bb.firebaseio.com",
-  projectId: "reactclientpanel-840bb",
-  storageBucket: "reactclientpanel-840bb.appspot.com",
-  messagingSenderId: "807991940811"
-};
+const firebaseConfig = {};
 
 // react-redux-firebase config
 // sets the user profile for user authentication ???
