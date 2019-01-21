@@ -1,3 +1,8 @@
+## Shomari's Notes
+
+Please note that this app currently only works with react-redux@5.1.1 and react-redux-firebase@2.2.4
+react redux was updated to use the Context API built into React and react-redux-firebase was updated to use the updated version of react-redux
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

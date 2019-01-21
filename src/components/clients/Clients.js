@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import PropTypes from "prop-types";
 
 class Clients extends Component {
   render() {
-    const clients = [
-      {
-        id: "1234",
-        firstName: "Joe",
-        lastName: "Jackson",
-        email: "joe@gmail.com",
-        phone: "555-555-5555",
-        balance: "30"
-      }
-    ];
+    const { clients } = this.props;
     if (clients) {
       return (
         <div>
@@ -65,4 +60,18 @@ class Clients extends Component {
   }
 }
 
-export default Clients;
+// PROP TYPES
+Clients.propTypes = {
+  firestore: PropTypes.object.isRequired,
+  clients: PropTypes.array
+};
+
+// with firebase and redux an extra step is needed
+// 1. connect firestore state to redux state
+// 2. connect redux state to props in component as usual
+export default compose(
+  firestoreConnect([{ collection: "clients" }]),
+  connect(state => ({
+    clients: state.firestore.ordered.clients
+  }))
+)(Clients);
