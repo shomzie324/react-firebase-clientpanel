@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import { compose } from "redux";
-// import { connect } from "react-redux";
+import { compose } from "redux";
+import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import PropTypes from "prop-types";
 
@@ -45,6 +45,8 @@ class AddClient extends Component {
   };
 
   render() {
+    const { disableBalanceOnAdd } = this.props.settings;
+
     return (
       <div>
         <div className='row'>
@@ -117,6 +119,7 @@ class AddClient extends Component {
                       name='balance'
                       onChange={this.onChange}
                       value={this.state.balance}
+                      disabled={disableBalanceOnAdd}
                     />
 
                     <br />
@@ -138,9 +141,13 @@ class AddClient extends Component {
 }
 
 AddClient.propTypes = {
-  firestore: PropTypes.object.isRequired
+  firestore: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired
 };
 
 // if nothing is needed from the state then only the firestore connect is needed not redux connect
 // firestore connect exposes this.props.firestore to the component to allow adding to firestore
-export default firestoreConnect()(AddClient);
+export default compose(
+  firestoreConnect(),
+  connect((state, props) => ({ settings: state.settings }))
+)(AddClient);
